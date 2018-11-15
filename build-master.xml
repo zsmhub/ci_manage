@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="codeigniter" default="build-end">
+    <property name="phpunit-bin" location="/usr/local/bin/phpunit"/>
+    <property name="mysql-bin" location="/usr/local/mysql/bin/mysql"/>
+    <property environment="env" />
+
+    <target name="clean" unless="clean.done" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/logs"/>
+        <property name="clean.done" value="true"/>
+    </target>
+
+    <target name="prepare" unless="prepare.done" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/logs/coverage-html"/>
+        <mkdir dir="${basedir}/build/logs/coverage-xml"/>
+        <mkdir dir="${basedir}/build/logs/testdox"/>
+        <property name="prepare.done" value="true"/>
+    </target>
+
+    <target name="lint"
+         unless="lint.done"
+         depends="prepare"
+         description="Perform syntax check of sourcecode files">
+      <apply executable="/usr/bin/php" taskname="lint">
+       <arg value="-l" />
+
+       <fileset dir="${basedir}/src/application">
+        <include name="**/*.php" />
+        <modified />
+       </fileset>
+
+       <fileset dir="${basedir}/tests/case">
+        <include name="**/*.php" />
+        <modified />
+       </fileset>
+      </apply>
+      <property name="lint.done" value="true"/>
+     </target>
+
+ 
+
+
+    <target name="build-number" depends="lint">
+        <replace file="${basedir}/src/application/config/config.php" token="@ASSERTS_VERSION@" value="${env.BUILD_DISPLAY_NAME}"/>
+    </target>
+
+
+    <target name="build-end" depends="build-number"/>
+</project>

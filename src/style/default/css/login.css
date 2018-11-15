@@ -1,0 +1,157 @@
+body{
+	background: url("../images/loginbg.jpg") repeat-x scroll 0 0  #fff;
+	margin:0
+}
+.bg {
+    height: 100%;
+    width: 100%;
+}
+.main {
+	width:100%;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.cp-head {
+    /*background: url("../images/loginhead.jpg") no-repeat scroll 0 0 #fff;*/
+    height: 110px;
+    width: 960px;
+	margin:0 auto
+}
+.headnav {
+    color: #446700;
+    float: right;
+    line-height: 24px;
+    padding-top: 30px;
+}
+a {
+    color: #224892;
+    outline: medium none;
+    text-decoration: none;
+}
+.container{
+	height:332px;
+	/*background: url("../images/banner.jpg") no-repeat scroll 0 0 #fff;*/
+    margin: 30px auto;
+    width: 1440px;
+}
+.w960{
+	width:auto;
+}
+.login{
+	float:right;
+	background: url("../images/loginbox_bg.jpg") no-repeat scroll 0 0;
+    height: 400px;
+    padding: 13px 14px 15px;
+    margin: 0 10% 0 0;
+    text-align: left;
+    width: 295px;
+    z-index: 2;
+}
+.loginFunc {
+    clear: both;
+    height: 47px;
+    overflow: hidden;
+    width: 100%;
+}
+.loginFuncNormal, .loginFuncApp {
+    color: #626262;
+    cursor: pointer;
+    float: left;
+    font-size: 14px;
+    height: 100%;
+    line-height: 46px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 148px;
+}
+.loginFuncApp {
+    background: url("../images/icon_code.png") no-repeat scroll 28px 17px rgba(0, 0, 0, 0);
+    border-right: medium none;
+    padding-left: 15px;
+    width: 132px;
+}
+.loginbox{
+	width:265px;
+	padding:5px 25px
+}
+.hide{ display:none}
+.tab-2{background-position: -323px 0;}
+.loginbox form{
+	padding-top:20px
+}
+label{
+	display:block;
+	padding:10px 0
+}
+label input {
+	height:40px;
+	font-size:14px;
+}
+.footer {
+    background-color: #212121;
+    bottom: 0;
+    box-shadow: 0 10px 10px -10px black inset;
+    height: 35px;
+    left: 0;
+    line-height: 35px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 11;
+    color: #ccc;
+    font-size: 12px;
+}
+#email {
+    background: #fff url("../images/user_pic.png") no-repeat scroll 0 5px;
+}
+#passwd {
+    background: #fff url("../images/pass_pic.png") no-repeat scroll 0 5px;
+    width: 140px;
+}
+/** 自定义input输入框样式 **/
+.sm-textbox {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    height: 40px;
+    line-height: 1.42857;
+    padding: 6px;
+    width: 230px;
+    font-size: 14px;
+    font-weight: normal;
+    text-indent: 25px;
+}
+.sm-textbox:focus {
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+/** 自定义按钮输入框样式 **/
+
+.sm-button {
+    height: 40px;
+    width: auto;
+    background-color: #00AA00;
+    color: #fff;
+    -moz-user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    padding: 6px 2px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.sm-button:hover, .sm-button:focus, .sm-button.focus, .sm-button:active, .sm-button.active {
+    background-color: #00DD00;
+    border-color: #00DD00;
+    color: #fff;
+}

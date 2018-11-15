@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="codeigniter" default="build-end">
+    <property name="phpunit-bin" location="/usr/local/bin/phpunit"/>
+    <property name="mysql-bin" location="/usr/local/mysql/bin/mysql"/>
+    <property environment="env" />
+
+    <target name="clean" unless="clean.done" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build/logs"/>
+        <property name="clean.done" value="true"/>
+    </target>
+
+    <target name="prepare" unless="prepare.done" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/logs/coverage-html"/>
+        <mkdir dir="${basedir}/build/logs/coverage-xml"/>
+        <mkdir dir="${basedir}/build/logs/testdox"/>
+        <property name="prepare.done" value="true"/>
+    </target>
+
+    <target name="lint"
+         unless="lint.done"
+         depends="prepare"
+         description="Perform syntax check of sourcecode files">
+      <apply executable="/usr/bin/php" taskname="lint">
+       <arg value="-l" />
+
+       <fileset dir="${basedir}/src/application">
+        <include name="**/*.php" />
+        <modified />
+       </fileset>
+
+       <fileset dir="${basedir}/tests/case">
+        <include name="**/*.php" />
+        <modified />
+       </fileset>
+      </apply>
+      <property name="lint.done" value="true"/>
+     </target>
+
+    <target name="phpcs" depends="lint"
+            description="Find coding standard violations using PHP_CodeSniffer and log result in XML format">
+        <exec executable="${basedir}/build/tools/phpcs.phar" output="/dev/null" taskname="phpcs">
+            <arg value="--report=checkstyle"/>
+            <arg value="--report-file=${basedir}/build/logs/checkstyle.xml"/>
+            <arg value="--standard=PSR2"/>
+            <arg value="--extensions=php"/>
+            <arg value="--ignore=*/views/*,*/cache/*,*/language/*,*/config/*"/>
+            <arg path="${basedir}/src/application"/>
+        </exec>
+    </target>
+
+    <!--<target name="mysql" depends="phpcs">
+        <exec executable="${basedir}/tests/sh/mysql.sh" output="/dev/null" taskname="mysql" outputproperty="result.mysql">
+            <arg value="${basedir}/build/logs/"/>
+        </exec>
+        <echo message="${result.mysql}"/>
+    </target>-->
+
+
+    <target name="phpunit" depends="phpcs,mysql" description="Run unit tests with PHPUnit">
+        <exec executable="${phpunit-bin}" resultproperty="result.phpunit" taskname="phpunit">
+            <arg value="--configuration"/>
+            <arg path="${basedir}/tests/phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="-check-failure" depends="phpunit">
+        <fail message="PHPUnit did not finish successfully">
+            <condition>
+                <not>
+                    <equals arg1="${result.phpunit}" arg2="0"/>
+                </not>
+            </condition>
+        </fail>
+    </target>
+
+    <target name="build-end" depends="-check-failure"/>
+</project>
